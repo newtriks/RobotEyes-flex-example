@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<s:Group xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:fx="http://ns.adobe.com/mxml/2009">
+    <fx:Metadata>
+        [Event(name='submitSearchEvent',type='flash.events.Event')]
+    </fx:Metadata>
+    <s:layout>
+        <s:HorizontalLayout paddingLeft="10"
+                            paddingRight="10"
+                            paddingBottom="10"
+                            paddingTop="10"/>
+    </s:layout>
+    <fx:Script><![CDATA[
+        private function submit_btn_clickHandler(event:MouseEvent):void
+        {
+            dispatchEvent(new Event('submitSearchEvent'));
+        }
+        ]]></fx:Script>
+    <s:TextInput id="searchRequest_txt" width="200"/>
+    <s:Button id="submit_btn" label="Search" click="submit_btn_clickHandler(event)"/>
+</s:Group>

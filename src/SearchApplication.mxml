@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               xmlns:views="com.newtriks.views.*"
+               pageTitle="RobotEyes Example"
+               width="100%"
+               height="100%">
+    <s:layout>
+        <s:VerticalLayout
+                paddingTop="20"
+                paddingLeft="20"
+                paddingRight="20"
+                paddingBottom="20"
+                horizontalAlign="center"/>
+    </s:layout>
+    <fx:Script><![CDATA[
+        protected function searchView_submitSearchEventHandler(event:Event):void
+        {
+            if(searchView.searchRequest_txt.text=="")
+            {
+                loggerView.logger_txt.text="Error: Search input must not be empty!";
+            }
+            else
+            {
+                loggerView.logger_txt.text="You submitted a search request for: ".concat(searchView.searchRequest_txt.text);
+            }
+        }
+        ]]></fx:Script>
+    <s:RichEditableText
+            editable="false"
+            focusEnabled="false">
+        <s:textFlow>
+            <s:TextFlow>
+                <s:p>
+                    Simple example application to test RobotEyes using
+                    <s:a href="https://github.com/newtriks/RobotEyes/tree/flex">this branch.</s:a>
+                </s:p>
+            </s:TextFlow>
+        </s:textFlow>
+    </s:RichEditableText>
+    <views:SearchView id="searchView"
+                      submitSearchEvent="searchView_submitSearchEventHandler(event)"/>
+    <views:Logger id="loggerView"
+                  width="100%"/>
+</s:Application>

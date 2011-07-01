@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<s:Group xmlns:s="library://ns.adobe.com/flex/spark"
+         xmlns:fx="http://ns.adobe.com/mxml/2009">
+    <s:layout>
+        <s:BasicLayout/>
+    </s:layout>
+    <s:TextArea id="logger_txt"
+                height="100%"
+                width="100%"/>
+</s:Group>
