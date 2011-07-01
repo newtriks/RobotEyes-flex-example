@@ -14,15 +14,19 @@
                 horizontalAlign="center"/>
     </s:layout>
     <fx:Script><![CDATA[
+
+        public static const INPUT_EMPTY_MESSAGE:String="Error: Search input must not be empty!";
+        public static const REQUEST_LOG_MESSAGE:String="You submitted a search request for: ";
+
         protected function searchView_submitSearchEventHandler(event:Event):void
         {
             if(searchView.searchRequest_txt.text=="")
             {
-                loggerView.logger_txt.text="Error: Search input must not be empty!";
+                loggerView.logger_txt.text=INPUT_EMPTY_MESSAGE;
             }
             else
             {
-                loggerView.logger_txt.text="You submitted a search request for: ".concat(searchView.searchRequest_txt.text);
+                loggerView.logger_txt.text=REQUEST_LOG_MESSAGE.concat(searchView.searchRequest_txt.text);
             }
         }
         ]]></fx:Script>

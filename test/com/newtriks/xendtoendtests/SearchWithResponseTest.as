@@ -18,7 +18,6 @@ package com.newtriks.xendtoendtests
     import com.newtriks.views.Logger;
     import com.newtriks.views.SearchView;
 
-    import flash.events.MouseEvent;
     import flash.utils.setTimeout;
 
     import spark.components.Button;
@@ -31,6 +30,8 @@ package com.newtriks.xendtoendtests
     {
         [Inject]
         public var async:IAsync;
+
+        protected static const TEXT_ENTERED:String="Hello World";
 
         private var robotEyes:RobotFlexEyes;
         private var searchApplication:SearchApplication;
@@ -87,8 +88,8 @@ package com.newtriks.xendtoendtests
         public function search_logger_contains_specific_string():void
         {
             var loggerTextDriver:TextAreaDriver=inViewOf(Logger).getA(TextArea).id("logger_txt") as TextAreaDriver;
-            loggerTextDriver.enterText('Hello World');
-            assertTrue(loggerTextDriver.textIs('Hello World'));
+            loggerTextDriver.enterText(TEXT_ENTERED);
+            assertTrue(loggerTextDriver.textIs(TEXT_ENTERED));
         }
 
         [Test]
@@ -118,14 +119,14 @@ package com.newtriks.xendtoendtests
         {
             var submitButtonDriver:InteractiveObjectDriver=inViewOf(SearchView).getA(Button).id("submit_btn") as InteractiveObjectDriver;
             submitButtonDriver.click();
-            var handler:Function = async.add(submitThrowsErrorClickHandler);
+            var handler:Function=async.add(submitThrowsErrorClickHandler);
             setTimeout(handler, 0);
         }
 
         private function submitThrowsErrorClickHandler():void
         {
             var loggerTextDriver:TextAreaDriver=inViewOf(Logger).getA(TextArea).id("logger_txt") as TextAreaDriver;
-            assertTrue(loggerTextDriver.textIs("Error: Search input must not be empty!"));
+            assertTrue(loggerTextDriver.textIs(SearchApplication.INPUT_EMPTY_MESSAGE));
         }
 
         [Test]
@@ -133,16 +134,16 @@ package com.newtriks.xendtoendtests
         {
             var submitButtonDriver:InteractiveObjectDriver=inViewOf(SearchView).getA(Button).id("submit_btn") as InteractiveObjectDriver;
             var textInputDriver:TextInputDriver=inViewOf(SearchView).getA(TextInput).id("searchRequest_txt") as TextInputDriver;
-            textInputDriver.enterText('Hello World');
+            textInputDriver.enterText(TEXT_ENTERED);
             submitButtonDriver.click();
-            var handler:Function = async.add(submitClickHandler);
+            var handler:Function=async.add(submitClickHandler);
             setTimeout(handler, 0);
         }
 
         private function submitClickHandler():void
         {
             var loggerTextDriver:TextAreaDriver=inViewOf(Logger).getA(TextArea).id("logger_txt") as TextAreaDriver;
-            assertTrue(loggerTextDriver.textIs("You submitted a search request for: Hello World"));
+            assertTrue(loggerTextDriver.textIs(SearchApplication.REQUEST_LOG_MESSAGE.concat(TEXT_ENTERED)));
         }
     }
 }
