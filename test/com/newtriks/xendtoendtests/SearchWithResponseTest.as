@@ -10,6 +10,7 @@ package com.newtriks.xendtoendtests
 
     import com.newloop.roboteyes.core.RobotFlexEyes;
     import com.newloop.roboteyes.drivers.DisplayObjectDriver;
+    import com.newloop.roboteyes.drivers.InteractiveObjectDriver;
     import com.newloop.roboteyes.drivers.flex.TextAreaDriver;
     import com.newloop.roboteyes.drivers.flex.TextInputDriver;
     import com.newloop.roboteyes.getAny;
@@ -115,9 +116,8 @@ package com.newtriks.xendtoendtests
         [Test]
         public function submit_throws_error_when_empty_search_text():void
         {
-            var submitButtonDriver:DisplayObjectDriver=inViewOf(SearchView).getA(Button).id("submit_btn");
-            var submitButton:Button=submitButtonDriver.view as Button;
-            submitButton.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+            var submitButtonDriver:InteractiveObjectDriver=inViewOf(SearchView).getA(Button).id("submit_btn") as InteractiveObjectDriver;
+            submitButtonDriver.click();
             var handler:Function = async.add(submitThrowsErrorClickHandler);
             setTimeout(handler, 0);
         }
@@ -131,11 +131,10 @@ package com.newtriks.xendtoendtests
         [Test]
         public function submits_successfully():void
         {
-            var submitButtonDriver:DisplayObjectDriver=inViewOf(SearchView).getA(Button).id("submit_btn");
-            var submitButton:Button=submitButtonDriver.view as Button;
+            var submitButtonDriver:InteractiveObjectDriver=inViewOf(SearchView).getA(Button).id("submit_btn") as InteractiveObjectDriver;
             var textInputDriver:TextInputDriver=inViewOf(SearchView).getA(TextInput).id("searchRequest_txt") as TextInputDriver;
             textInputDriver.enterText('Hello World');
-            submitButton.dispatchEvent(new MouseEvent(MouseEvent.CLICK));
+            submitButtonDriver.click();
             var handler:Function = async.add(submitClickHandler);
             setTimeout(handler, 0);
         }
